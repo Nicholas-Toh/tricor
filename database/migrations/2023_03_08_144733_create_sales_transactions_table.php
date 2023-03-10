@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('sales_transactions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('item_name');
+            $table->foreignId('user_id')->constrained('users');
+            $table->decimal('amount', 14, 4)->default(0.00);
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
