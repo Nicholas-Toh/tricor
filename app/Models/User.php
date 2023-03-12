@@ -39,4 +39,8 @@ class User extends Model implements
     protected $hidden = [
         'password',
     ];
+
+    public function marketing_agent() {
+        return $this->hasOne(MarketingAgent::class);
+    }
 }
