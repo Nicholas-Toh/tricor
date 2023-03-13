@@ -7,7 +7,7 @@ import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     sales_item: '',
-    amount: '',
+    amount: 1,
 });
 
 const createSalesTransaction = () => {
@@ -41,12 +41,12 @@ const createSalesTransaction = () => {
             </div>
 
             <div>
-                <InputLabel for="quantity" value="Quantity" />
+                <InputLabel for="amount" value="Amount" />
 
-                <TextInput id="quantity" ref="quantityInput" v-model="form.quantity" type="number" class="mt-1 block w-full"
+                <TextInput id="amount" ref="amountInput" v-model="form.amount" type="number" class="mt-1 block w-full"
                     min="1" />
 
-                <InputError :message="form.errors.quantity" class="mt-2" />
+                <InputError :message="form.errors.amount" class="mt-2" />
             </div>
 
             <div class="flex items-center gap-4">

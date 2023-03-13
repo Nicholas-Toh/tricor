@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\UserRole;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -38,6 +39,10 @@ class User extends Model implements
      */
     protected $hidden = [
         'password',
+    ];
+
+    protected $casts = [
+        'role' => UserRole::class,
     ];
 
     public function marketing_agent() {

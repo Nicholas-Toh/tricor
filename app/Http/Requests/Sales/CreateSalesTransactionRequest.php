@@ -7,12 +7,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CreateSalesTransactionRequest extends FormRequest
 {
+    protected $redirectRoute = 'dashboard';
+
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        dd($this->user()->role, in_array($this->user()->role, [UserRole::Manager, UserRole::MarketingAgent]));
         return in_array($this->user()->role, [UserRole::Manager, UserRole::MarketingAgent]);
     }
 
@@ -25,14 +26,14 @@ class CreateSalesTransactionRequest extends FormRequest
     {
         return [
             'sales_item' => ['required', 'string'],
-            'quantity' => ['required', 'numeric', 'gt:0'],
+            'amount' => ['required', 'numeric', 'gt:0'],
         ];
     }
 
     public function messages() {
        return [
-            'quantity.numeric' => 'Please enter a number.',
-            'quantity.gt' => 'Please enter a valid quantity.',
+            'amount.numeric' => 'Please enter a number.',
+            'amount.gt' => 'Please enter a valid amount.',
        ];
     }
 }

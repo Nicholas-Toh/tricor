@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SalesTransaction extends Model
 {
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *

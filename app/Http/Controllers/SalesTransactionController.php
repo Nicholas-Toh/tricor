@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Sales\CreateSalesTransactionRequest;
-use App\Models\SalesTransaction;
 use Illuminate\Http\Request;
+use App\Models\SalesTransaction;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\Sales\CreateSalesTransactionRequest;
 
 class SalesTransactionController extends Controller
 {
@@ -17,12 +18,14 @@ class SalesTransactionController extends Controller
     /**
      * Creates a new sales transaction entry.
      */
-    public function store(CreateSalesTransactionRequest $request): Response
+    public function store(CreateSalesTransactionRequest $request): RedirectResponse
     {
-        return SalesTransaction::create([
+        SalesTransaction::create([
             'sales_item' => $request->sales_item,
             'amount' => $request->amount,
             'user_id' => Auth::id(),
         ]);
+
+        return Redirect::to('/dashboard');
     }
 }
