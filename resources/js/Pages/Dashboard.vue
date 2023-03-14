@@ -1,6 +1,5 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import SalesTransactionForm from '@/Pages/Sales/Partials/SalesTransactionForm.vue';
 import { Head } from '@inertiajs/vue3';
 </script>
 
@@ -12,12 +11,14 @@ import { Head } from '@inertiajs/vue3';
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <SalesTransactionForm />
+        <slot>
+            <div class="py-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900">You're logged in!</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </slot>
     </AuthenticatedLayout>
 </template>

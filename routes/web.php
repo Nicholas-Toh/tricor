@@ -1,10 +1,13 @@
 <?php
 
+use App\Enum\UserRole;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SalesReportController;
 use App\Http\Controllers\SalesTransactionController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +29,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+Route::get('/dashboard', function (Request $request) {
+    switch ($request->user()->role) {
+        case UserRole::Manager:
+            return Inertia::render('ManagerDashboard');
+        case UserRole::MarketingAgent:
+            return Inertia::render('MarketingAgentDashboard');
+        default:
+            return Inertia::render('Dashboard');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -40,6 +50,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('sales-transactions')->controller(SalesTransactionController::class)->group(function () {
         Route::get('', 'index')->name('api.sales-transaction');
         Route::post('', 'store')->name('api.sales-transaction.store');
+    });
+
+    Route::prefix('sales-reports')->controller(SalesReportController::class)->group(function () {
+        Route::get('', 'index')->name('sales-report');
+        Route::post('', 'store')->name('sales-report.store');
     });
 });
 
