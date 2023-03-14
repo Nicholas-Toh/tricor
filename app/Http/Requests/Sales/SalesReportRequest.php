@@ -26,10 +26,19 @@ class SalesReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'view' => ['string', Rule::in(SalesReportView::cases())],
-            'month' => ['numeric', 'between:1,12'],
-            'year' => ['string'],
-            'agent' => ['numeric', 'exists:' . User::class . ',id'],
+            'view' => ['nullable', 'string', Rule::in(['month', 'year'])],
+            'month' => ['nullable', 'numeric', 'between:1,12'],
+            'year' => ['nullable', 'string'],
+            'agent' => ['nullable', 'numeric', 'exists:' . User::class . ',id'],
+        ];
+    }
+
+    public function messages(): array {
+        return [
+            'view' => "Please select a valid format.",
+            'month' => "Please enter a valid month.",
+            'year' => "Please enter a valid year.",
+            'agent' => "Agent does not exist.",
         ];
     }
 }

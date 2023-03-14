@@ -18,7 +18,11 @@ class SalesTransaction extends Model
         'amount',
     ];
 
-    public function marketing_agent() {
+    protected $casts = [
+        'amount' => 'float'
+    ];
+
+    public function user() {
         return $this->belongsTo(User::class);
     }
 }
