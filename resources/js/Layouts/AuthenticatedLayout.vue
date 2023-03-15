@@ -30,6 +30,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
+                                <slot name="nav-links" />
                             </div>
                         </div>
 
@@ -90,6 +91,7 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
+                        <slot name="dropdown-nav-links" />
                     </div>
 
                     <!-- Responsive Settings Options -->

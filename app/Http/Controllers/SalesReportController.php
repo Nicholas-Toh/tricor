@@ -46,7 +46,7 @@ class SalesReportController extends Controller
         //             })
         //             ->get()
         //         ]));
-        return Inertia::render('ManagerReportsDashboard', [
+        return Inertia::render('ManagerReports', [
             'view' => $request->view,
             'views' => SalesReportView::cases(),
             'viewLabels' => config('labels.sales_report_view_labels'),
