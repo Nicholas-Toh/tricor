@@ -29,9 +29,21 @@ const form = useForm({
     view: props.views[0],
 });
 
+function scrollToJustAbove(element, margin = 0) {
+    let dims = element.getBoundingClientRect();
+    window.scrollTo({ left: window.scrollX, top: dims.top - margin + window.pageYOffset, behavior: 'smooth' });
+}
+
 const getSalesReport = () => {
     form.get(route('sales-reports'), {
         preserveState: true,
+        preserveScroll: true,
+        onSuccess: () => {
+            const report = document.getElementById('sales-report');
+            if (report) {
+                scrollToJustAbove(report, 75)
+            }
+        },
         onError: () => {
             if (form.errors.agent) {
                 form.reset('agent');

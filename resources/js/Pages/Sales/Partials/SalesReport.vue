@@ -34,7 +34,7 @@ const total = computed(() => props.salesTransactions.reduce((acc, value) => acc 
 </script>
 
 <template>
-    <section>
+    <section id="sales-report">
         <header class="text-center">
             <h2 class="text-4xl font-medium text-gray-900">Sales Report</h2>
             <p class="mt-1 text-xl text-gray-600">
