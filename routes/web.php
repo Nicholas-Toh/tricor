@@ -37,6 +37,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
                 return Inertia::render('ManagerDashboard', [
                     'views' => SalesReportView::cases(),
                     'viewLabels' => config('labels.sales_report_view_labels'),
+                    'agents' => $request->user()->marketing_agents
                 ]);
             case UserRole::MarketingAgent:
                 return Inertia::render('MarketingAgentDashboard');

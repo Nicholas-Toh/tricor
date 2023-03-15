@@ -5,6 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Select from '@/Components/Select.vue';
 import { useForm } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 const props = defineProps({
     views: {
@@ -15,7 +16,12 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    agents: {
+        type: Array,
+        required: true,
+    }
 })
+console.log(props)
 
 const form = useForm({
     agent: '',
@@ -36,6 +42,16 @@ const getSalesReport = () => {
         },
     });
 };
+
+const agentOptions = computed(() => props.agents.map(agent => agent.user_id));
+const agentOptionLabels = computed(() => {
+    let temp = {};
+    for (const agent of props.agents) {
+        temp[agent.user_id] = agent.user.name;
+    }
+
+    return temp;
+});
 
 </script>
 
@@ -77,8 +93,9 @@ const getSalesReport = () => {
             <div>
                 <InputLabel for="agent" value="Marketing Agent ID" />
 
-                <TextInput id="agent" ref="salesItemInput" v-model="form.agent" type="text" class="mt-1 block w-full"
-                    autocomplete="on" />
+                <Select id="agent" class="mt-1 block w-full" v-model="form.agent" :options="agentOptions"
+                    :labels="agentOptionLabels">
+                </Select>
 
                 <InputError :message="form.errors.agent" class="mt-2" />
             </div>

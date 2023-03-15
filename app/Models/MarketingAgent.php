@@ -16,7 +16,15 @@ class MarketingAgent extends Model
         'manager_id',
     ];
 
+    protected $with = [
+        'user'
+    ];
+
     public function manager() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'manager_id');
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class,'user_id');
     }
 }
