@@ -13,39 +13,9 @@ use Inertia\Response;
 class SalesReportController extends Controller
 {
     public function index(SalesReportRequest $request): Response {
-        $month = $request->input('month', Carbon::now()->month);
-        $year = $request->input('year', Carbon::now()->year);
-        // dd(SalesTransaction::with('user')
-        // ->when($request->input('view', SalesReportView::Month) === SalesReportView::Month, function ($query) use ($month) {
-        //     $query->whereMonth('created_at', $month);
-        // })
-        // ->whereYear('created_at', $year)    
-        // ->when($request->agent, function($query, $agent_id) {
-        //     $query->whereUserId($agent_id);
-        // })
-        // ->whereHas('user', function ($query) {
-        //     $query->whereHas('marketing_agent', function ($query) {
-        //         $query->whereManagerId(Auth::id());
-        //     });
-        // })->toSql());
-        // dd(Inertia::render('ManagerReportsDashboard', [
-        //     'date' => Carbon::now()->day(1)->month($month)->year($year),
-        //     'salesTransactions' => 
-        //         SalesTransaction::with('user')
-        //             ->when($request->input('view', SalesReportView::Month) === SalesReportView::Month, function ($query) use ($month) {
-        //                 $query->whereMonth('created_at', $month);
-        //             })
-        //             ->whereYear('created_at', $year)
-        //             ->when($request->agent, function($query, $agent_id) {
-        //                 $query->whereUserId($agent_id);
-        //             })
-        //             ->whereHas('user', function ($query) {
-        //                 $query->whereHas('marketing_agent', function ($query) {
-        //                     $query->whereManagerId(Auth::id());
-        //                 });
-        //             })
-        //             ->get()
-        //         ]));
+        $month = $request->input('month') ?? Carbon::now()->month;
+        $year = $request->input('year') ?? Carbon::now()->year;
+
         return Inertia::render('ManagerReports', [
             'view' => $request->view,
             'views' => SalesReportView::cases(),
@@ -65,7 +35,8 @@ class SalesReportController extends Controller
                             $query->whereManagerId(Auth::id());
                         });
                     })
-                    ->get()
+                    ->get(),
+            'agents' => $request->user()->marketing_agents
         ]);
     }
 }
