@@ -86,7 +86,7 @@ const agentOptionLabels = computed(() => {
                 <InputLabel for="month" value="Month" />
 
                 <TextInput id="month" ref="month" v-model="form.month" type="number" class="mt-1 block w-full" min="1"
-                    max="12" />
+                    max="12" placeholder="1 - 12" />
 
                 <InputError :message="form.errors.month" class="mt-2" />
             </div>
@@ -95,7 +95,8 @@ const agentOptionLabels = computed(() => {
                 <InputLabel for="year" value="Year" />
 
                 <TextInput id="year" ref="year" v-model="form.year" type="number" class="mt-1 block w-full" min="1900"
-                    :max="new Date().toLocaleDateString('en-gb', { year: 'numeric' })" />
+                    :max="new Date().toLocaleDateString('en-gb', { year: 'numeric' })"
+                    :placeholder="new Date().toLocaleDateString('en-gb', { year: 'numeric' })" />
 
                 <InputError :message="form.errors.year" class="mt-2" />
             </div>
