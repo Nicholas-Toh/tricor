@@ -40,7 +40,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
                     'agents' => $request->user()->marketing_agents
                 ]);
             case UserRole::MarketingAgent:
-                return Inertia::render('MarketingAgentDashboard');
+                return Inertia::render('MarketingAgentDashboard', [
+                    'salesTransactions' => $request->user()->sales_transactions()->limit(20)->latest()->get(),
+                ]);
             default:
                 return Inertia::render('Dashboard');
         }

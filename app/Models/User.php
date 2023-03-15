@@ -52,4 +52,8 @@ class User extends Model implements
     public function marketing_agents() {
         return $this->hasMany(MarketingAgent::class, 'manager_id');
     }
+
+    public function sales_transactions() {
+        return $this->hasMany(SalesTransaction::class);
+    }
 }
