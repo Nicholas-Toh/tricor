@@ -15,6 +15,7 @@ class SalesReportController extends Controller
     public function index(SalesReportRequest $request): Response {
         $month = $request->input('month') ?? Carbon::now()->month;
         $year = $request->input('year') ?? Carbon::now()->year;
+        $view = SalesReportView::tryFrom($request->input('view')) ?? SalesReportView::Month;
 
         return Inertia::render('ManagerReports', [
             'view' => $request->view,
@@ -23,7 +24,7 @@ class SalesReportController extends Controller
             'date' => Carbon::now()->day(1)->month($month)->year($year),
             'salesTransactions' => 
                 SalesTransaction::with('user')
-                    ->when($request->input('view', SalesReportView::Month) === SalesReportView::Month, function ($query) use ($month) {
+                    ->when($view === SalesReportView::Month, function ($query) use ($month) {
                         $query->whereMonth('created_at', $month);
                     })
                     ->whereYear('created_at', $year)
