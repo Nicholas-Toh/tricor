@@ -21,7 +21,6 @@ const props = defineProps({
         required: true,
     }
 })
-console.log(props)
 
 const form = useForm({
     agent: '',
@@ -33,7 +32,6 @@ const form = useForm({
 const getSalesReport = () => {
     form.get(route('sales-reports'), {
         preserveState: true,
-        preserveScroll: true,
         onError: () => {
             if (form.errors.agent) {
                 form.reset('agent');
