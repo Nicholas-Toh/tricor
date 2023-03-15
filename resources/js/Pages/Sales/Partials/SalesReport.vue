@@ -30,13 +30,24 @@ const dateString = computed(() => {
     }
 });
 
+const reportTitle = computed(() => {
+    switch (props.view) {
+        case 'year':
+            return 'Annual Sales Report'
+        case 'month':
+            return 'Monthly Sales Report'
+        default:
+            return 'Sales Report'
+    }
+})
+
 const total = computed(() => props.salesTransactions.reduce((acc, value) => acc + value.amount, 0))
 </script>
 
 <template>
     <section id="sales-report">
         <header class="text-center">
-            <h2 class="text-4xl font-medium text-gray-900">Sales Report</h2>
+            <h2 class="text-4xl font-medium text-gray-900">{{ reportTitle }}</h2>
             <p class="mt-1 text-xl text-gray-600">
                 For the period {{ dateString }}
             </p>
