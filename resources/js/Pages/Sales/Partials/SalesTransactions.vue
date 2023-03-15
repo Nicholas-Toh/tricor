@@ -30,14 +30,14 @@ const total = computed(() => props.salesTransactions.reduce((acc, value) => acc 
                         <td class="border border-collapse border-slate-400">{{ transaction.sales_item }}</td>
                         <td class="border border-collapse border-slate-400">{{ new
                             Date(transaction.created_at).toLocaleDateString() }}</td>
-                        <td class="border border-collapse border-slate-400">{{ transaction.amount }}</td>
+                        <td class="border border-collapse border-slate-400">{{ transaction.amount.toFixed(2) }}</td>
                     </tr>
 
                 </tbody>
             </table>
         </div>
         <div class="mt-6 pr-4 text-lg w-full text-right">
-            <span><b>Total: RM{{ total }}</b></span>
+            <span><b>Total: RM{{ total.toFixed(2) }}</b></span>
         </div>
     </section>
 </template>
