@@ -44,7 +44,7 @@ const createSalesTransaction = () => {
                 <InputLabel for="amount" value="Amount" />
 
                 <TextInput id="amount" ref="amountInput" v-model="form.amount" type="number" class="mt-1 block w-full"
-                    min="1" required />
+                    min="1" step="any" required />
 
                 <InputError :message="form.errors.amount" class="mt-2" />
             </div>
