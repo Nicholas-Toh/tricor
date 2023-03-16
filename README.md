@@ -13,7 +13,8 @@
 4. Create .env file and customize the fields.
 5. Run `php artisan key:generate`
 6. Run `php artisan optimize`.
-7. Run `php artisan serve`.
+7. Run `php artisan migrate --seed`.
+8. Run `php artisan serve`.
 
 ### Features
 These features were developed in accordance to the requirements specified in the technical assessment document.
